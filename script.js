@@ -99,20 +99,20 @@ async function query() {
 
         if (result) {
             const allKeys = Object.keys(result);
-            // Ezhou 表格
+            // Ezhou 表格，排除 P1 和 P2
             let ezhouHtml = '<h3>Ezhou, Hubei Province (Long-day environment)</h3>';
-            ezhouHtml += '<table><tr><th>Property</th><th>Value</th></tr>';
-            const ezhouKeys = ['P1', 'P2'].concat(allKeys.filter(key => key.startsWith('E')));
+            ezhouHtml += '<table><tr><th>Trait</th><th>Value</th></tr>';
+            const ezhouKeys = allKeys.filter(key => key.startsWith('E')); // 只保留 E1-E15
             for (const key of ezhouKeys) {
                 ezhouHtml += `<tr><td>${displayKeyName(key)}</td><td>${result[key]}</td></tr>`;
             }
             ezhouHtml += '</table>';
             ezhouDiv.innerHTML = ezhouHtml;
 
-            // Sanya 表格
+            // Sanya 表格，排除 P1 和 P2
             let sanyaHtml = '<h3>Sanya, Hainan Province (Short-day environment)</h3>';
-            sanyaHtml += '<table><tr><th>Property</th><th>Value</th></tr>';
-            const sanyaKeys = ['P1', 'P2'].concat(allKeys.filter(key => key.startsWith('S')));
+            sanyaHtml += '<table><tr><th>Trait</th><th>Value</th></tr>';
+            const sanyaKeys = allKeys.filter(key => key.startsWith('S')); // 只保留 S1-S15
             for (const key of sanyaKeys) {
                 sanyaHtml += `<tr><td>${displayKeyName(key)}</td><td>${result[key]}</td></tr>`;
             }
