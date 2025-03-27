@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicted Hybrid Rice Phenotypes Query System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Predicted Hybrid Rice Phenotypes Query System</h2>
+        <label>Enter Parent1:</label>
+        <input type="text" id="parent1Input" list="parent1List" placeholder="Type to search...">
+        <datalist id="parent1List"></datalist>
+        <br>
+        <label>Enter Parent2:</label>
+        <input type="text" id="parent2Input" list="parent2List" placeholder="Type to search...">
+        <datalist id="parent2List"></datalist>
+        <br>
+        <button onclick="query()">Query</button>
+        <div id="result" class="result-container">
+            <div id="ezhouResult" class="table-container"></div>
+            <div id="sanyaResult" class="table-container"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
