@@ -1,40 +1,40 @@
 let indexData;
 
-// ¼üÃûÌæ»»º¯Êý
+// ¼üÃûºÍµ¥Î»Ìæ»»º¯Êý
 function displayKeyName(key) {
     const replacements = {
-        'E1': 'Heading date',
-        'E2': 'Plant height',
-        'E3': 'Spikelets per plant',
-        'E4': 'Filled grains per plant',
-        'E5': 'Spikelets per panicle',
-        'E6': 'Filled grains per panicle',
-        'E7': 'Seed setting rate',
-        'E8': 'Panicle length',
-        'E9': 'Spikelet density',
-        'E10': 'Tillers per plant',
-        'E11': 'Grain length',
-        'E12': 'Grain width',
-        'E13': 'Grain shape',
-        'E14': '1000-grain weight',
-        'E15': 'Grain yield per plant',
-        'S1': 'Heading date',
-        'S2': 'Plant height',
-        'S3': 'Spikelets per plant',
-        'S4': 'Filled grains per plant',
-        'S5': 'Spikelets per panicle',
-        'S6': 'Filled grains per panicle',
-        'S7': 'Seed setting rate',
-        'S8': 'Panicle length',
-        'S9': 'Spikelet density',
-        'S10': 'Tillers per plant',
-        'S11': 'Grain length',
-        'S12': 'Grain width',
-        'S13': 'Grain shape',
-        'S14': '1000-grain weight',
-        'S15': 'Grain yield per plant'
+        'E1': { name: 'Heading date', unit: 'days' },
+        'E2': { name: 'Plant height', unit: 'cm' },
+        'E3': { name: 'Spikelets per plant', unit: '' }, // ÒÆ³ý count
+        'E4': { name: 'Filled grains per plant', unit: '' }, // ÒÆ³ý count
+        'E5': { name: 'Spikelets per panicle', unit: '' }, // ÒÆ³ý count
+        'E6': { name: 'Filled grains per panicle', unit: '' }, // ÒÆ³ý count
+        'E7': { name: 'Seed setting rate', unit: '' },
+        'E8': { name: 'Panicle length', unit: 'cm' },
+        'E9': { name: 'Spikelet density', unit: '' }, // ÒÆ³ý count/cm
+        'E10': { name: 'Tillers per plant', unit: '' }, // ÒÆ³ý count
+        'E11': { name: 'Grain length', unit: 'mm' },
+        'E12': { name: 'Grain width', unit: 'mm' },
+        'E13': { name: 'Grain shape', unit: '' },
+        'E14': { name: '1000-grain weight', unit: 'g' },
+        'E15': { name: 'Grain yield per plant', unit: 'g' },
+        'S1': { name: 'Heading date', unit: 'days' },
+        'S2': { name: 'Plant height', unit: 'cm' },
+        'S3': { name: 'Spikelets per plant', unit: '' }, // ÒÆ³ý count
+        'S4': { name: 'Filled grains per plant', unit: '' }, // ÒÆ³ý count
+        'S5': { name: 'Spikelets per panicle', unit: '' }, // ÒÆ³ý count
+        'S6': { name: 'Filled grains per panicle', unit: '' }, // ÒÆ³ý count
+        'S7': { name: 'Seed setting rate', unit: '' },
+        'S8': { name: 'Panicle length', unit: 'cm' },
+        'S9': { name: 'Spikelet density', unit: '' }, // ÒÆ³ý count/cm
+        'S10': { name: 'Tillers per plant', unit: '' }, // ÒÆ³ý count
+        'S11': { name: 'Grain length', unit: 'mm' },
+        'S12': { name: 'Grain width', unit: 'mm' },
+        'S13': { name: 'Grain shape', unit: '' },
+        'S14': { name: '1000-grain weight', unit: 'g' },
+        'S15': { name: 'Grain yield per plant', unit: 'g' }
     };
-    return replacements[key] || key;
+    return replacements[key] || { name: key, unit: '' };
 }
 
 async function loadIndex() {
@@ -104,7 +104,8 @@ async function query() {
             ezhouHtml += '<table><tr><th>Trait</th><th>Estimated value</th></tr>';
             const ezhouKeys = allKeys.filter(key => key.startsWith('E'));
             for (const key of ezhouKeys) {
-                ezhouHtml += `<tr><td>${displayKeyName(key)}</td><td>${result[key]}</td></tr>`;
+                const { name, unit } = displayKeyName(key);
+                ezhouHtml += `<tr><td>${name}</td><td>${result[key]}${unit ? ' ' + unit : ''}</td></tr>`;
             }
             ezhouHtml += '</table>';
             ezhouDiv.innerHTML = ezhouHtml;
@@ -114,7 +115,8 @@ async function query() {
             sanyaHtml += '<table><tr><th>Trait</th><th>Estimated value</th></tr>';
             const sanyaKeys = allKeys.filter(key => key.startsWith('S'));
             for (const key of sanyaKeys) {
-                sanyaHtml += `<tr><td>${displayKeyName(key)}</td><td>${result[key]}</td></tr>`;
+                const { name, unit } = displayKeyName(key);
+                sanyaHtml += `<tr><td>${name}</td><td>${result[key]}${unit ? ' ' + unit : ''}</td></tr>`;
             }
             sanyaHtml += '</table>';
             sanyaDiv.innerHTML = sanyaHtml;
